@@ -6,28 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="assets/css/estilos.css">
 </head>
 
 <body>
     <div class="espaco">
-        <div class="mesa">
-            <div class="mesa-cima">
-                <div class="jogador" id="player" player="1"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
-                <div class="jogador" id="player" player="2"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
-                <div class="jogador" id="player" player="3"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
-                <div class="jogador" id="player" player="4"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+        <div class="mesa-config">
+            <div class="btnNumPlayersDiv">
+                <button class="btn-player" id="btnAddPlayer">Add player</button>
+                <button class="btn-player" id="btnAddPlayer">Remove player</button>
             </div>
-            <div class="mesa-centro">
-                <button class="botao" btn-passar>Passar</button>
-                <div id="timer" class="timer">Start Game</div>
-                <button class="botao" btn-desistir>Desistir</button>
-            </div>
-            <div class="mesa-baixo">
-                <div class="jogador" id="player" player="8"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
-                <div class="jogador" id="player" player="7"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
-                <div class="jogador" id="player" player="6"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
-                <div class="jogador" id="player" player="5"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+
+            <span class="TimeElement">
+                <label for="timeInSeconds" class="lblTime">Time in seconds(max 999)</label>
+                <div class="inputTimeDiv">
+                    <input type="number" max="999" min="0" class="time-seconds" id="timeInSeconds" value="120">
+                </div>
+            </span>
+
+            <button class="ready btn-player" id="ready">We're Ready!</button>
+        </div>
+        <div class="mesa-flex">
+            <div class="mesa">
+                <div class="mesa-cima">
+                    <div class="jogador" id="player" player="1"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+                    <div class="jogador" id="player" player="2"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+                    <div class="jogador" id="player" player="3"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+                    <div class="jogador" id="player" player="4"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+                </div>
+                <div class="mesa-centro">
+                    <button class="botao" btn-passar>Passar</button>
+                    <div id="timer" class="timer">Start Game</div>
+                    <button class="botao" btn-desistir>Desistir</button>
+                </div>
+                <div class="mesa-baixo">
+                    <div class="jogador" id="player" player="8"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+                    <div class="jogador" id="player" player="7"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+                    <div class="jogador" id="player" player="6"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+                    <div class="jogador" id="player" player="5"><img src="imgs/player.png" class="player-img" width="50px" height="50px"></div>
+                </div>
             </div>
         </div>
     </div>

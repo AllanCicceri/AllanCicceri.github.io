@@ -1,0 +1,122 @@
+body {
+    background-color: cadetblue;
+}
+.espaco{display: flex; justify-content: center; flex-direction: column; margin: 50px;}
+.mesa {
+    border-radius: 150px;
+    border: solid 5px black;
+    background-color: aquamarine;
+    width: 1200px;
+    height: 500px;
+    display: grid;
+    grid-template-rows: 20% 1fr 20%;
+    margin: 20px;
+    filter: grayscale(100%);
+    pointer-events:none; /*bloqueia ações na div*/
+
+
+}
+.mesa-cima, .mesa-baixo{
+    /* height: 150px; */
+    position: relative;
+    width: 100%;
+    display: flex;
+    /* flex-basis: 25%; */
+}
+
+.mesa-centro{
+    height: 250px;
+    display: flex;
+    /* justify-content: center; */
+    justify-content: space-around;
+}
+
+button{
+    border-radius: 50px;
+    width: 200px;
+    height: 150px;
+    margin: 50px 0px;
+    font-size: 50px;
+    border: solid black 5px;
+}
+
+.timer{
+    font-size: 50px;
+    padding: 10px 0px;
+    background-color: #EFEFEF;
+    border: solid black 5px;
+    border-radius: 50px;
+}
+.jogador{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+img{
+    filter: grayscale(90%);
+    padding: 20px;
+}
+
+.timer{
+    font-size: 100px;
+    padding: 60px;
+}
+
+.btn-player{
+    width: 200px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    
+    font-size: 20px;
+    font-weight: bold;
+
+    border: solid black 3px;
+    
+    color: aquamarine;
+}
+.mesa-config{
+    display: flex;
+    justify-content: center;
+}
+.inputTimeDiv{
+    display: flex;
+    justify-content: center;
+}
+.TimeElement{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    justify-content: center;
+}
+.lblTime{
+    margin-left: 20px;
+}
+.time-seconds{
+    width: 80px;
+    height: 20px;
+    
+    border: black solid 3px;
+    border-radius: 20px;
+
+    margin-left: 10px;
+
+    text-align: center;
+}
+
+.btnNumPlayersDiv{
+    margin-top: 15px;
+}
+
+.ready{
+    margin-top: 15px;
+}
+
+.mesa-flex{
+    display: flex;
+    justify-content: center;
+}
+
+.mesa-config > button, input{
+    color: aquamarine;
+}
