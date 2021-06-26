@@ -55,6 +55,7 @@ btnPassar.onclick = function (e) {
 }
 btnDesistir.onclick = function (e) {
     removePlayer(posicaoJogador)
+    passarVez(posicaoJogador)
 }
 
 function passarVez(jogadorAtual) {
@@ -87,6 +88,9 @@ function removePlayer(player) {
         const restart = document.querySelector('#timer')
         restart.style = "border: solid 5px black; background-color: #EFEFEF"
         restart.innerHTML = "Restart"
+        greyScaleAll()
+        removeGrayScale()
+        removedPlayers = ""
     }
 }
 //-----------------------------------------------
