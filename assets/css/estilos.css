@@ -23,7 +23,9 @@ body {
     display: flex;
     /* flex-basis: 25%; */
 }
-
+.mesa-baixo{
+    flex-direction: row-reverse;
+}
 .mesa-centro{
     height: 250px;
     display: flex;
