@@ -50,6 +50,49 @@ function removeGrayScale() {
 //----- Botões (opções de jogada)-----------------
 const btnPassar = document.querySelector('[btn-passar]')
 const btnDesistir = document.querySelector('[btn-desistir]')
+const btnReady = document.getElementById('ready')
+
+btnReady.onclick = function (e){
+    const numOfPlayers = document.getElementById('numberOfPlayers')
+    const timeInSeconds = document.getElementById('timeInSeconds')
+    const mesaCima = document.getElementById('mesa-cima')
+    const mesaBaixo = document.getElementById('mesa-baixo')
+    const mesa = document.getElementById('mesa')
+    const mesaConfig = document.querySelectorAll('#mesaConfig input')
+    let stop = false
+    
+    if((!numOfPlayers.value || !timeInSeconds.value) || (numOfPlayers.value < 2 || numOfPlayers.value > 8) || (timeInSeconds.value < 0 || timeInSeconds.value > 999)){
+        alert("Valor inválido em algum dos campos!")
+        return
+    }   
+    
+    mesa.style = "pointer-events:auto; filter:none"
+    e.target.innerHTML = "Stop Game"
+    
+    mesaConfig.forEach(e =>{
+        e.style = "pointer-events:none; filter:grayscale(100%)"
+    })
+
+    for (let i = 0; i < numOfPlayers.value; i++) {
+        const divPlayer = document.createElement('div')
+        divPlayer.id = 'player'
+        divPlayer.classList.add('jogador')
+        divPlayer.setAttribute('player', i +1)
+        const img = document.createElement('img')
+        img.classList.add('player-img')
+        img.style = "width: 50px; height: 50px"
+        img.src = "imgs/player.png"
+        divPlayer.appendChild(img) 
+        
+        if(i < 4){
+            mesaCima.appendChild(divPlayer)
+        }else{
+            mesaBaixo.appendChild(divPlayer)
+        }
+        
+    }
+}
+
 btnPassar.onclick = function (e) {
     passarVez(posicaoJogador)
 }

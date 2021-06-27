@@ -79,11 +79,11 @@ img{
     display: flex;
     justify-content: center;
 }
-.inputTimeDiv{
+.inputTimeDiv,.inputNumOfPlayers{
     display: flex;
     justify-content: center;
 }
-.TimeElement{
+.TimeElement,.btnNumPlayersDiv{
     display: flex;
     flex-direction: column;
     width: 200px;
@@ -92,7 +92,7 @@ img{
 .lblTime{
     margin-left: 20px;
 }
-.time-seconds{
+.time-seconds, .numer-of-players{
     width: 80px;
     height: 20px;
     
@@ -104,9 +104,6 @@ img{
     text-align: center;
 }
 
-.btnNumPlayersDiv{
-    margin-top: 15px;
-}
 
 .ready{
     margin-top: 15px;
