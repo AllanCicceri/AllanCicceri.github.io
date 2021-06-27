@@ -1,6 +1,2 @@
-node_modules/
-menu.css
-createGame.js
-menu.js
-player.js
-inde2x.html
+node_modules/,
+servidor.js
