@@ -3,8 +3,9 @@ let removedPlayers = ""
 let intervalIdentifier = 0
 let numOfPlayers = 0
 let timeInSeconds =0
+const btnTimer = document.querySelector('#timer')
 
-document.querySelector('#timer').onclick = e => start(e)
+btnTimer.onclick = e => start(e)
 
 function start(e) {
     const botao = e.target
@@ -12,7 +13,6 @@ function start(e) {
 
     const elements = document.querySelectorAll(`[player]>img`)
     elements.forEach(e => {
-        console.log(e)
         e.src = "imgs/player.png"
     })
     greyScaleAll
@@ -20,7 +20,12 @@ function start(e) {
     posicaoJogador = 1
     removeGrayScale()
 
-    timerController(botao, 5)
+    timerController(botao, timeInSeconds)
+}
+
+function restartTimer(){
+    clearInterval(intervalIdentifier)
+    timerController(btnTimer, timeInSeconds) 
 }
 
 
@@ -49,14 +54,15 @@ function removeGrayScale() {
     playerAtual.style = "filter: none"
 }
 
+
 //----- Botões (opções de jogada)-----------------
 const btnPassar = document.querySelector('[btn-passar]')
 const btnDesistir = document.querySelector('[btn-desistir]')
 const btnReady = document.getElementById('ready')
 
 btnReady.onclick = function (e) {
-    numOfPlayers = document.getElementById('numberOfPlayers')
-    timeInSeconds = document.getElementById('timeInSeconds')
+    numOfPlayers = document.getElementById('numberOfPlayers').value
+    timeInSeconds = document.getElementById('timeInSeconds').value
     const mesaCima = document.getElementById('mesa-cima')
     const mesaBaixo = document.getElementById('mesa-baixo')
     const mesa = document.getElementById('mesa')
@@ -83,7 +89,7 @@ btnReady.onclick = function (e) {
         removedPlayers = ""
     } else {
 
-        if ((!numOfPlayers.value || !timeInSeconds.value) || (numOfPlayers.value < 2 || numOfPlayers.value > 8) || (timeInSeconds.value < 0 || timeInSeconds.value > 999)) {
+        if ((!numOfPlayers || !timeInSeconds) || (numOfPlayers < 2 || numOfPlayers > 8) || (timeInSeconds < 0 || timeInSeconds > 999)) {
             alert("Valor inválido em algum dos campos!")
             return
         }
@@ -95,7 +101,7 @@ btnReady.onclick = function (e) {
             e.style = "pointer-events:none; filter:grayscale(100%)"
         })
 
-        for (let i = 0; i < numOfPlayers.value; i++) {
+        for (let i = 0; i < numOfPlayers; i++) {
             const divPlayer = document.createElement('div')
             divPlayer.id = 'player'
             divPlayer.classList.add('jogador')
@@ -121,8 +127,14 @@ btnPassar.onclick = function (e) {
     passarVez(posicaoJogador)
 }
 btnDesistir.onclick = function (e) {
-    removePlayer(posicaoJogador)
-    passarVez(posicaoJogador)
+    if(removedPlayers.length == numOfPlayers -1){
+        console.log(`Ganhador: ${posicaoJogador}`)
+        clearInterval(intervalIdentifier)
+    }else{
+        removePlayer(posicaoJogador)
+        passarVez(posicaoJogador)
+        restartTimer()
+    }
 }
 
 function passarVez(jogadorAtual) {
