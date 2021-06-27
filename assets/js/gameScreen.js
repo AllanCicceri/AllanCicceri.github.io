@@ -5,7 +5,7 @@ let numOfPlayers = 0
 let timeInSeconds =0
 const btnTimer = document.querySelector('#timer')
 
-const playersArray = []
+let playersArray = []
 
 btnTimer.onclick = e => start(e)
 
@@ -56,29 +56,24 @@ btnReady.onclick = function (e) {
         })
 
 
-        const vetAllPlayers = createAllPlayers(numOfPlayers)
+        playersArray = createAllPlayers(numOfPlayers)
         
         for (let i = 0; i < numOfPlayers; i++) {
             if (i < 4) {
-                mesaCima.appendChild(vetAllPlayers[i].domElement)
+                mesaCima.appendChild(playersArray[i].domElement)
             } else {
-                mesaBaixo.appendChild(vetAllPlayers[i].domElement)
+                mesaBaixo.appendChild(playersArray[i].domElement)
             }
 
         }
     }
 }
 
+
+
 btnPassar.onclick = function (e) {
-    passarVez(posicaoJogador)
+    passarJogada()
 }
 btnDesistir.onclick = function (e) {
-    if(removedPlayers.length == numOfPlayers -1){
-        console.log(`Ganhador: ${posicaoJogador}`)
-        clearInterval(intervalIdentifier)
-    }else{
-        removePlayer(posicaoJogador)
-        passarVez(posicaoJogador)
-        restartTimer()
-    }
+    removePlayer(playersArray)
 }

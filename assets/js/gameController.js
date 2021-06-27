@@ -1,41 +1,4 @@
 
-function removePlayer(player) {
-    if (removedPlayers.length < 7) {
-        const element = document.querySelector(`[player="${player}"]>img`)
-        element.src = "imgs/player-quit.png"
-        removedPlayers += player
-    } else {
-        clearInterval(intervalIdentifier)
-        const restart = document.querySelector('#timer')
-        restart.style = "border: solid 5px black; background-color: #EFEFEF"
-        restart.innerHTML = "Restart"
-        greyScaleAll()
-        removeGrayScale()
-        removedPlayers = ""
-    }
-}
-
-
-function passarVez(jogadorAtual) {
-    let novoJogador = jogadorAtual + 1 //document.querySelector(`[player-pos="${jogadorAtual + 1}"]`) .getAttribute('player-pos')
-
-    if (novoJogador > 8) novoJogador = 1
-
-    while (removedPlayers.includes(novoJogador)) {
-        novoJogador++
-
-        if (novoJogador > 8) novoJogador = 1
-    }
-
-    //if(novoJogador > 8) novoJogador = 1
-
-    posicaoJogador = novoJogador
-
-    greyScaleAll()
-    removeGrayScale()
-}
-
-
 function restartTimer(){
     clearInterval(intervalIdentifier)
     timerController(btnTimer, timeInSeconds) 
@@ -72,4 +35,39 @@ function start(e) {
     removeGrayScale()
 
     timerController(botao, timeInSeconds)
+}
+
+
+//---- novas funções
+function proximoJogador(jogadorAtual){
+    jogadorAtual ++
+
+    if(jogadorAtual > playersArray.length)
+        jogadorAtual = 1
+    
+    while (playersArray[jogadorAtual -1].inactive) {
+        jogadorAtual++
+        
+        if(jogadorAtual > playersArray.length)
+        jogadorAtual = 1
+    
+    }
+    
+    return jogadorAtual
+}
+
+function passarJogada(){
+    posicaoJogador = proximoJogador(posicaoJogador)
+    greyScaleAll()
+    removeGrayScale()
+    restartTimer()
+}
+
+
+function removePlayer(playersArray){
+
+    playersArray[posicaoJogador -1].inactive = true
+    playersArray[posicaoJogador -1].domElement.querySelector('img').src = "imgs/player-quit.png" 
+    passarJogada()
+    restartTimer()
 }
