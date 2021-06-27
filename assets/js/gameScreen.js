@@ -1,40 +1,42 @@
 let posicaoJogador = 0
 let removedPlayers = ""
 let intervalIdentifier = 0
+let numOfPlayers = 0
+let timeInSeconds =0
 
 document.querySelector('#timer').onclick = e => start(e)
 
 function start(e) {
     const botao = e.target
     botao.style = "background-color: transparent; border: none"
-    
+
     const elements = document.querySelectorAll(`[player]>img`)
     elements.forEach(e => {
         console.log(e)
         e.src = "imgs/player.png"
     })
     greyScaleAll
-    
+
     posicaoJogador = 1
     removeGrayScale()
-    
+
     timerController(botao, 5)
 }
 
 
 function timerController(element, seconds) {
     const time = seconds
-    
+
     intervalIdentifier = setInterval(() => {
-            seconds--
-            if (seconds > 0) {
-                element.innerHTML = seconds
-            } else {
-                removePlayer(posicaoJogador)
-                passarVez(posicaoJogador)
-                seconds = time
-            }
-        }, 1000); 
+        seconds--
+        if (seconds > 0) {
+            element.innerHTML = seconds
+        } else {
+            removePlayer(posicaoJogador)
+            passarVez(posicaoJogador)
+            seconds = time
+        }
+    }, 1000);
 }
 
 function greyScaleAll() {
@@ -52,44 +54,66 @@ const btnPassar = document.querySelector('[btn-passar]')
 const btnDesistir = document.querySelector('[btn-desistir]')
 const btnReady = document.getElementById('ready')
 
-btnReady.onclick = function (e){
-    const numOfPlayers = document.getElementById('numberOfPlayers')
-    const timeInSeconds = document.getElementById('timeInSeconds')
+btnReady.onclick = function (e) {
+    numOfPlayers = document.getElementById('numberOfPlayers')
+    timeInSeconds = document.getElementById('timeInSeconds')
     const mesaCima = document.getElementById('mesa-cima')
     const mesaBaixo = document.getElementById('mesa-baixo')
     const mesa = document.getElementById('mesa')
     const mesaConfig = document.querySelectorAll('#mesaConfig input')
     let stop = false
-    
-    if((!numOfPlayers.value || !timeInSeconds.value) || (numOfPlayers.value < 2 || numOfPlayers.value > 8) || (timeInSeconds.value < 0 || timeInSeconds.value > 999)){
-        alert("Valor inválido em algum dos campos!")
-        return
-    }   
-    
-    mesa.style = "pointer-events:auto; filter:none"
-    e.target.innerHTML = "Stop Game"
-    
-    mesaConfig.forEach(e =>{
-        e.style = "pointer-events:none; filter:grayscale(100%)"
-    })
 
-    for (let i = 0; i < numOfPlayers.value; i++) {
-        const divPlayer = document.createElement('div')
-        divPlayer.id = 'player'
-        divPlayer.classList.add('jogador')
-        divPlayer.setAttribute('player', i +1)
-        const img = document.createElement('img')
-        img.classList.add('player-img')
-        img.style = "width: 50px; height: 50px"
-        img.src = "imgs/player.png"
-        divPlayer.appendChild(img) 
-        
-        if(i < 4){
-            mesaCima.appendChild(divPlayer)
-        }else{
-            mesaBaixo.appendChild(divPlayer)
+    if (e.target.innerHTML == "Stop Game") {
+        mesaConfig.forEach(e => {
+            e.style = "pointer-events:auto; filter:none"
+        })
+        e.target.innerHTML = "We're Ready"
+
+        mesa.style = "pointer-events:none; filter:grayscale(100%)"
+
+        mesaCima.innerHTML = ""
+        mesaBaixo.innerHTML = ""
+
+        clearInterval(intervalIdentifier)
+        const restart = document.querySelector('#timer')
+        restart.style = "border: solid 5px black; background-color: #EFEFEF"
+        restart.innerHTML = "Restart"
+        greyScaleAll()
+        removeGrayScale()
+        removedPlayers = ""
+    } else {
+
+        if ((!numOfPlayers.value || !timeInSeconds.value) || (numOfPlayers.value < 2 || numOfPlayers.value > 8) || (timeInSeconds.value < 0 || timeInSeconds.value > 999)) {
+            alert("Valor inválido em algum dos campos!")
+            return
         }
-        
+
+        mesa.style = "pointer-events:auto; filter:none"
+        e.target.innerHTML = "Stop Game"
+
+        mesaConfig.forEach(e => {
+            e.style = "pointer-events:none; filter:grayscale(100%)"
+        })
+
+        for (let i = 0; i < numOfPlayers.value; i++) {
+            const divPlayer = document.createElement('div')
+            divPlayer.id = 'player'
+            divPlayer.classList.add('jogador')
+            divPlayer.setAttribute('player', i + 1)
+            const img = document.createElement('img')
+            img.classList.add('player-img')
+            img.style = "width: 50px; height: 50px"
+            img.src = "imgs/player.png"
+            divPlayer.appendChild(img)
+
+            if (i < 4) {
+                mesaCima.appendChild(divPlayer)
+            } else {
+                mesaBaixo.appendChild(divPlayer)
+            }
+
+        }
+
     }
 }
 
@@ -126,7 +150,6 @@ function removePlayer(player) {
         element.src = "imgs/player-quit.png"
         removedPlayers += player
     } else {
-        console.log('limpou', intervalIdentifier)
         clearInterval(intervalIdentifier)
         const restart = document.querySelector('#timer')
         restart.style = "border: solid 5px black; background-color: #EFEFEF"
