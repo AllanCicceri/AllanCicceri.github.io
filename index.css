@@ -36,7 +36,30 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: start;
     color: #E9ECEF;
     padding: 10px;
     font-size: small;
+}
+
+.container-contato img{
+    width: 20px;
+    height: 20px;
+}
+
+.contato{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+}
+
+.contato img{
+    margin-right: 10px;
+}
+
+.contato a{
+    text-decoration: none;
+    color: inherit;
+    font-weight: normal;
 }
